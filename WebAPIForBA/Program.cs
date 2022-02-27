@@ -1,3 +1,4 @@
+using WebAPIForBA.Filters.Exceptions;
 using WebAPIForBA.Orchestrators;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,11 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddMvc();
+builder.Services.AddMvc(options =>
+{
+    options.Filters.Add(new ArrayExceptionFilterAttribute());
+});
 
 builder.Services.AddSingleton<AccountOrchestrator, AccountOrchestrator>();
 builder.Services.AddSingleton<DepartmentOrchestrator, DepartmentOrchestrator>();
 builder.Services.AddSingleton<ProfileOrchestrator, ProfileOrchestrator>();
+
+//builder.Services.Fil
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

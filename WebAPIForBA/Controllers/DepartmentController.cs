@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebAPIForBA.Dto.Account;
 using WebAPIForBA.Dto.Department;
+using WebAPIForBA.Filters.Actions;
 using WebAPIForBA.Orchestrators;
 
 namespace WebAPIForBA.Controllers
@@ -16,6 +16,7 @@ namespace WebAPIForBA.Controllers
             _orchestrator = rep;
         }
 
+        [CustomValidationFilter]
         [HttpGet]
         public IActionResult GetAll(int take = 10)
         {
